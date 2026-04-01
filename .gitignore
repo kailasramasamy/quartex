@@ -1,0 +1,12 @@
+node_modules
+dist
+.output
+.vinxi
+.turbo
+*.tsbuildinfo
+routeTree.gen.ts
+.env
+.env.*
+!.env.example
+vite.config.timestamp_*
+.DS_Store
