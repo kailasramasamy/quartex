@@ -2,6 +2,7 @@ import Fastify from "fastify"
 import cors from "@fastify/cors"
 import multipart from "@fastify/multipart"
 import rateLimit from "@fastify/rate-limit"
+import helmet from "@fastify/helmet"
 import jwtPlugin from "./plugins/jwt.js"
 import authRoutes from "./routes/auth/index.js"
 import healthRoutes from "./routes/health/index.js"
@@ -17,6 +18,10 @@ export async function buildApp() {
   const app = Fastify({ logger: true })
 
   await app.register(cors, { origin: true })
+  await app.register(helmet, {
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
+  })
   await app.register(multipart)
   await app.register(rateLimit, {
     global: false,

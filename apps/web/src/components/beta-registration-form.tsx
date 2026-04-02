@@ -146,6 +146,19 @@ export function BetaRegistrationForm({
         />
       </div>
 
+      <label className="flex items-start gap-3 cursor-pointer">
+        <input
+          type="checkbox"
+          required
+          className="accent-accent mt-1"
+        />
+        <span className="text-xs text-text-secondary leading-relaxed">
+          I agree to receive emails about this beta program including testing
+          instructions, release updates, and reward notifications. I can
+          unsubscribe at any time.
+        </span>
+      </label>
+
       {error && (
         <p className="text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-lg px-4 py-3">
           {error}
