@@ -81,9 +81,14 @@ function ProgramTestersTab({ programId, onCountChange }: ProgramTestersTabProps)
   useEffect(() => {
     setIsLoading(true)
     api
-      .get<{ data: TesterRow[]; pagination: { total: number } }>(`/testers/by-program/${programId}`)
+      .get<{ data: Array<{ tester: { id: string; name: string; email: string; phone: string }; enrollment: ProgramTester }>; pagination: { total: number } }>(`/testers/by-program/${programId}`)
       .then((res) => {
-        setTesters(res.data)
+        setTesters(res.data.map((d) => ({
+          ...d.enrollment,
+          name: d.tester.name,
+          email: d.tester.email,
+          phone: d.tester.phone,
+        })))
         onCountChange(res.pagination.total)
       })
       .catch(console.error)

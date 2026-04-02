@@ -79,9 +79,9 @@ function ProgramFeedbackTab({ programId, onCountChange }: ProgramFeedbackTabProp
   useEffect(() => {
     setIsLoading(true)
     api
-      .get<{ data: Feedback[]; pagination: { total: number } }>(`/feedback/by-program/${programId}`)
+      .get<{ data: Array<{ feedback: Feedback; testerName: string; testerEmail: string }>; pagination: { total: number } }>(`/feedback/by-program/${programId}`)
       .then((res) => {
-        setFeedback(res.data)
+        setFeedback(res.data.map((d) => d.feedback))
         onCountChange(res.pagination.total)
       })
       .catch(console.error)
