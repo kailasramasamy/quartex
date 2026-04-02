@@ -10,7 +10,7 @@ function ProductShowcaseHeader() {
         Our <GradientText>Products</GradientText>
       </h2>
       <p className="mt-4 text-lg text-text-secondary">
-        Purpose-built software for modern operations
+        AI-powered software built for modern operations
       </p>
     </div>
   )

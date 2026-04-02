@@ -17,7 +17,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Quartex builds high-performance software products for quick commerce, logistics, and business automation.",
+          "Quartex builds AI-powered software products for quick commerce, logistics, and business automation.",
       },
     ],
     links: [
@@ -31,6 +31,7 @@ export const Route = createRootRoute({
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap",
       },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
       { rel: "stylesheet", href: appCss },
     ],
   }),

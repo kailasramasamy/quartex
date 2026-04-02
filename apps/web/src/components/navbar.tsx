@@ -45,11 +45,12 @@ function Navbar() {
     <>
       <header className="sticky top-0 z-40 backdrop-blur-xl bg-bg-primary/80 border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link
-            to="/"
-            className="font-heading font-bold text-xl text-text-primary shrink-0"
-          >
-            Quartex
+          <Link to="/" className="shrink-0">
+            <img
+              src="/quartex-logo.png"
+              alt="Quartex"
+              className="h-7"
+            />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-6">

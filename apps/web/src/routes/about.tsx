@@ -10,7 +10,7 @@ export const Route = createFileRoute("/about")({
     meta: buildMeta({
       title: "About",
       description:
-        "Quartex Technologies builds high-performance software for quick commerce, logistics, and business automation.",
+        "Quartex Technologies builds AI-powered software for quick commerce, logistics, and business automation.",
     }),
   }),
   component: AboutPage,
@@ -48,7 +48,7 @@ function AboutPage() {
     <main>
       <PageHeader
         title="About Quartex"
-        subtitle="We build the software backbone for modern commerce operations."
+        subtitle="We build AI-powered software for modern commerce operations."
       />
 
       <SectionWrapper>
