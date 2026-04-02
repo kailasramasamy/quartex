@@ -1,0 +1,28 @@
+{
+  "name": "@quartex/admin",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev --port 3001",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@quartex/shared": "workspace:*",
+    "@tanstack/react-router": "^1",
+    "lucide-react": "^0.474",
+    "react": "^19",
+    "react-dom": "^19"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4",
+    "@tanstack/router-plugin": "^1",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^4.7.0",
+    "tailwindcss": "^4",
+    "typescript": "^5.8",
+    "vite": "^6"
+  }
+}
