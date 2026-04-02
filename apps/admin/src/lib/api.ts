@@ -3,7 +3,7 @@ const BASE_URL = (import.meta.env.VITE_API_URL as string) || "/api/v1"
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
   const token = localStorage.getItem("quartex_token")
   const headers: Record<string, string> = {
-    "Content-Type": "application/json",
+    ...(options?.body ? { "Content-Type": "application/json" } : {}),
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
   }
 
