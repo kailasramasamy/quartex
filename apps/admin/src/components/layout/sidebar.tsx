@@ -42,9 +42,10 @@ function Sidebar() {
 
   return (
     <aside className="fixed left-0 top-0 w-64 h-screen bg-bg-secondary border-r border-border flex flex-col z-20">
-      <div className="px-5 py-6 border-b border-border">
-        <span className="font-heading text-lg font-semibold text-text-primary">
-          Quartex Admin
+      <div className="px-5 py-6 border-b border-border flex items-center gap-3">
+        <img src="/quartex-logo.png" alt="Quartex" className="h-6" />
+        <span className="text-[10px] font-semibold uppercase tracking-widest text-accent bg-accent/10 px-2 py-0.5 rounded">
+          Admin
         </span>
       </div>
 
