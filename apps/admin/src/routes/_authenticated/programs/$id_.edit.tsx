@@ -7,7 +7,7 @@ import { ProgramForm } from "~/components/programs/program-form"
 import { api } from "~/lib/api"
 import type { TestProgram } from "@quartex/shared"
 
-export const Route = createFileRoute("/_authenticated/programs/$id/edit")({
+export const Route = createFileRoute("/_authenticated/programs/$id_/edit")({
   component: EditProgramPage,
 })
 
