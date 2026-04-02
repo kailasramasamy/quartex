@@ -1,6 +1,7 @@
 import Fastify from "fastify"
 import cors from "@fastify/cors"
 import multipart from "@fastify/multipart"
+import rateLimit from "@fastify/rate-limit"
 import jwtPlugin from "./plugins/jwt.js"
 import authRoutes from "./routes/auth/index.js"
 import healthRoutes from "./routes/health/index.js"
@@ -17,6 +18,9 @@ export async function buildApp() {
 
   await app.register(cors, { origin: true })
   await app.register(multipart)
+  await app.register(rateLimit, {
+    global: false,
+  })
   await app.register(jwtPlugin)
 
   await app.register(authRoutes, { prefix: "/api/v1/auth" })

@@ -8,7 +8,9 @@ import { authenticate } from "../../middleware/auth.js"
 import { unauthorized, notFound } from "../../lib/errors.js"
 
 export default async function authRoutes(fastify: FastifyInstance): Promise<void> {
-  fastify.post("/login", async (request, reply) => {
+  fastify.post("/login", {
+    config: { rateLimit: { max: 5, timeWindow: "1 minute" } },
+  }, async (request, reply) => {
     const parsed = loginSchema.safeParse(request.body)
     if (!parsed.success) {
       return reply.code(400).send({ error: "Invalid request body" })

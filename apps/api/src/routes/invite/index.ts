@@ -92,7 +92,9 @@ export default async function inviteRoutes(fastify: FastifyInstance): Promise<vo
     })
   })
 
-  fastify.post("/:code/register", async (request, reply) => {
+  fastify.post("/:code/register", {
+    config: { rateLimit: { max: 5, timeWindow: "1 minute" } },
+  }, async (request, reply) => {
     const { code } = request.params as InviteParams["Params"]
 
     const program = await getProgramByCode(code)

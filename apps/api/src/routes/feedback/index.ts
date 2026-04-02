@@ -91,7 +91,9 @@ export default async function feedbackRoutes(app: FastifyInstance): Promise<void
     return reply.send({ feedback: updated })
   })
 
-  app.post("/submit", async (request, reply) => {
+  app.post("/submit", {
+    config: { rateLimit: { max: 10, timeWindow: "1 minute" } },
+  }, async (request, reply) => {
     const body = request.body as {
       programId: string
       testerEmail: string
