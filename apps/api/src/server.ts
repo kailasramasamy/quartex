@@ -1,5 +1,6 @@
 import { env } from "./config/env.js"
 import { buildApp } from "./app.js"
+import { startScheduler } from "./jobs/scheduler.js"
 
 const app = await buildApp()
 
@@ -14,6 +15,7 @@ process.on("SIGTERM", () => shutdown("SIGTERM"))
 
 try {
   await app.listen({ port: env.PORT, host: "0.0.0.0" })
+  startScheduler()
 } catch (err) {
   app.log.error(err)
   process.exit(1)
