@@ -121,12 +121,12 @@ export default async function feedbackRoutes(app: FastifyInstance): Promise<void
         and(
           eq(programTesters.programId, body.programId),
           eq(programTesters.testerId, tester.id),
-          eq(programTesters.status, "active"),
         ),
       )
       .limit(1)
 
-    if (!enrollment) throw badRequest("Tester is not active in this program")
+    if (!enrollment) throw badRequest("Tester is not enrolled in this program")
+    if (enrollment.status === "dropped") throw badRequest("Tester has been removed from this program")
 
     const [created] = await db
       .insert(feedback)
