@@ -5,6 +5,11 @@ import path from "node:path"
 
 export default defineConfig({
   plugins: [tanstackStart(), tailwindcss()],
+  server: {
+    proxy: {
+      "/api": "http://localhost:4000",
+    },
+  },
   resolve: {
     alias: {
       "~": path.resolve(import.meta.dirname, "src"),

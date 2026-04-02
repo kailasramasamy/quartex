@@ -81,6 +81,7 @@ export default async function inviteRoutes(fastify: FastifyInstance): Promise<vo
     const spotsRemaining = Math.max(0, program.maxTesters - testerCount)
 
     return reply.send({
+      id: program.id,
       name: program.appName,
       description: program.description,
       platforms: program.platforms,
