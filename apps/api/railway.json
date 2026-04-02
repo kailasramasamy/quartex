@@ -1,0 +1,9 @@
+{
+  "$schema": "https://railway.com/railway.schema.json",
+  "build": {
+    "buildCommand": "cd ../.. && pnpm install --force && pnpm build --filter=@quartex/api"
+  },
+  "deploy": {
+    "startCommand": "npx tsx src/server.ts"
+  }
+}
