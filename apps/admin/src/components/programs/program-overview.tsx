@@ -66,7 +66,7 @@ function InviteLinkRow({ code }: { code: string }) {
   )
 }
 
-const canDelete = (status: ProgramStatus) => status === "draft" || status === "cancelled"
+const canDelete = (_status: ProgramStatus) => true
 
 function OverviewHeader({ program, action, isUpdating, isDeleting, onEditClick, onStatusUpdate, onDelete }: {
   program: TestProgram

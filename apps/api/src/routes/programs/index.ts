@@ -161,10 +161,6 @@ export default async function programRoutes(fastify: FastifyInstance): Promise<v
     const { id } = (request.params as ProgramParams["Params"])
     const program = await getProgramOrThrow(id)
 
-    if (!["draft", "cancelled"].includes(program.status)) {
-      throw conflict("Program can only be deleted when in draft or cancelled status")
-    }
-
     await db.delete(testPrograms).where(eq(testPrograms.id, id))
     return reply.send({ success: true })
   })
