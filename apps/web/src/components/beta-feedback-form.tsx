@@ -67,7 +67,7 @@ export function BetaFeedbackForm({
     try {
       const payload = {
         programId,
-        email: form.email,
+        testerEmail: form.email,
         category: form.category,
         priority: form.priority,
         title: form.title,
