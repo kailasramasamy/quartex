@@ -1,9 +1,0 @@
-{
-  "$schema": "https://railway.com/railway.schema.json",
-  "build": {
-    "buildCommand": "cd ../.. && pnpm install --force && VITE_API_URL=https://api.quartex.in/api/v1 pnpm build:admin"
-  },
-  "deploy": {
-    "startCommand": "node server.prod.js"
-  }
-}
