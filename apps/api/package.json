@@ -1,0 +1,38 @@
+{
+  "name": "@quartex/api",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "tsx src/services/seed.ts"
+  },
+  "dependencies": {
+    "@quartex/shared": "workspace:*",
+    "fastify": "^5",
+    "@fastify/cors": "^11",
+    "@fastify/multipart": "^9",
+    "@fastify/jwt": "^9",
+    "drizzle-orm": "^0.44",
+    "postgres": "^3.4",
+    "zod": "^4",
+    "argon2": "^0.43",
+    "node-cron": "^3",
+    "nodemailer": "^7",
+    "fastify-plugin": "^5"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/node-cron": "^3",
+    "@types/nodemailer": "^6",
+    "drizzle-kit": "^0.31",
+    "tsx": "^4",
+    "typescript": "^5.8"
+  }
+}
