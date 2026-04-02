@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "tsx src/server.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
@@ -29,6 +29,7 @@
     "node-cron": "^3",
     "nodemailer": "^7",
     "postgres": "^3.4",
+    "tsx": "^4.21.0",
     "zod": "^4"
   },
   "devDependencies": {
@@ -36,7 +37,6 @@
     "@types/node-cron": "^3",
     "@types/nodemailer": "^6",
     "drizzle-kit": "^0.31",
-    "tsx": "^4",
     "typescript": "^5.8"
   }
 }
