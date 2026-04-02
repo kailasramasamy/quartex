@@ -21,8 +21,8 @@ function EditProgramPage() {
 
   useEffect(() => {
     api
-      .get<TestProgram>(`/programs/${id}`)
-      .then(setProgram)
+      .get<{ program: TestProgram }>(`/programs/${id}`)
+      .then((r) => setProgram(r.program))
       .catch(console.error)
       .finally(() => setIsLoading(false))
   }, [id])
