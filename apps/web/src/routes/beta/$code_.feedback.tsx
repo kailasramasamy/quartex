@@ -16,7 +16,7 @@ interface InviteProgram {
   testDurationDays: number
 }
 
-export const Route = createFileRoute("/beta/$code/feedback")({
+export const Route = createFileRoute("/beta/$code_/feedback")({
   head: ({ loaderData }) => {
     const data = loaderData as InviteProgram | undefined
     return {
