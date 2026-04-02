@@ -1,1 +1,9 @@
-{}
+{
+  "$schema": "https://railway.com/railway.schema.json",
+  "build": {
+    "buildCommand": "pnpm install --force && pnpm build:web"
+  },
+  "deploy": {
+    "startCommand": "cd apps/web && node server.prod.js"
+  }
+}
