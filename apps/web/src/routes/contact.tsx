@@ -30,15 +30,16 @@ function ContactPage() {
           </div>
 
           <div className="lg:col-span-2 space-y-8">
-            <ContactInfo
-              icon={Mail}
-              title="Email"
-              detail="hello@quartex.in"
-            />
+            <SpamProofEmail />
             <ContactInfo
               icon={MapPin}
               title="Location"
-              detail="Vrindavan, Uttar Pradesh, India"
+              lines={[
+                "Quartex Technologies",
+                "Sy No 26, Janthgondanahalli",
+                "Varthur, Muthsandra Post",
+                "Sarjapur Hobli, Bangalore 560087",
+              ]}
             />
           </div>
         </div>
@@ -47,14 +48,39 @@ function ContactPage() {
   )
 }
 
+function SpamProofEmail() {
+  const user = "hello"
+  const domain = "quartex.in"
+  const handleClick = () => {
+    window.location.href = `mailto:${user}@${domain}`
+  }
+
+  return (
+    <div className="flex items-start gap-4">
+      <div className="rounded-lg bg-accent/10 p-3 shrink-0">
+        <Mail size={22} className="text-accent" />
+      </div>
+      <div>
+        <h3 className="font-heading font-semibold mb-1">Email</h3>
+        <button
+          onClick={handleClick}
+          className="text-text-secondary text-sm hover:text-accent transition-colors cursor-pointer"
+        >
+          {user}[at]{domain}
+        </button>
+      </div>
+    </div>
+  )
+}
+
 function ContactInfo({
   icon: Icon,
   title,
-  detail,
+  lines,
 }: {
   icon: typeof Mail
   title: string
-  detail: string
+  lines: string[]
 }) {
   return (
     <div className="flex items-start gap-4">
@@ -63,7 +89,11 @@ function ContactInfo({
       </div>
       <div>
         <h3 className="font-heading font-semibold mb-1">{title}</h3>
-        <p className="text-text-secondary text-sm">{detail}</p>
+        {lines.map((line, i) => (
+          <p key={i} className={`text-text-secondary text-sm ${i === 0 ? "font-medium text-text-primary" : ""}`}>
+            {line}
+          </p>
+        ))}
       </div>
     </div>
   )
