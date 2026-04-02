@@ -12,6 +12,23 @@ type ProgramParams = { Params: { programId: string } }
 type ProgramTesterParams = { Params: { programId: string; testerId: string } }
 
 export default async function testerRoutes(app: FastifyInstance): Promise<void> {
+  // Public: lookup tester by email (for feedback form verification)
+  app.get("/lookup", {
+    config: { rateLimit: { max: 10, timeWindow: "1 minute" } },
+  }, async (request, reply) => {
+    const { email } = request.query as { email?: string }
+    if (!email) throw badRequest("Email is required")
+
+    const [tester] = await db
+      .select({ name: testers.name })
+      .from(testers)
+      .where(eq(testers.email, email))
+      .limit(1)
+
+    if (!tester) throw notFound("Tester not found")
+    return reply.send({ name: tester.name })
+  })
+
   app.get("/", { preHandler: [authenticate] }, async (request, reply) => {
     const { search, page, limit } = request.query as Record<string, string>
     const { offset, limit: lim } = paginate({ page, limit })
