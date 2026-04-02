@@ -13,18 +13,13 @@ export const Route = createFileRoute("/_authenticated/feedback/")({
   component: FeedbackPage,
 })
 
-interface ProgramListResponse {
-  data: TestProgram[]
-}
-
-interface FeedbackListResponse {
-  data: Feedback[]
-}
-
 function useProgramList() {
   const [programs, setPrograms] = useState<TestProgram[]>([])
   useEffect(() => {
-    api.get<ProgramListResponse>("/programs?page=1&limit=100").then((r) => setPrograms(r.data)).catch(() => {})
+    api
+      .get<{ data: Array<{ program: TestProgram }>; pagination: unknown }>("/programs?page=1&limit=100")
+      .then((r) => setPrograms(r.data.map((d) => d.program)))
+      .catch(() => {})
   }, [])
   return programs
 }
@@ -52,8 +47,8 @@ function FeedbackPage() {
     setLoading(true)
     setError(null)
     api
-      .get<FeedbackListResponse>(`/feedback/by-program/${selectedProgramId}`)
-      .then((r) => setFeedback(r.data))
+      .get<{ data: Array<{ feedback: Feedback }>; pagination: unknown }>(`/feedback/by-program/${selectedProgramId}`)
+      .then((r) => setFeedback(r.data.map((d) => d.feedback)))
       .catch((err: Error) => setError(err.message))
       .finally(() => setLoading(false))
   }, [selectedProgramId])

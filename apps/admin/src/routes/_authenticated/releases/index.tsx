@@ -14,13 +14,13 @@ export const Route = createFileRoute("/_authenticated/releases/")({
   component: ReleasesPage,
 })
 
-interface ProgramListResponse { data: TestProgram[] }
-interface ReleaseListResponse { data: Release[] }
-
 function usePrograms() {
   const [programs, setPrograms] = useState<TestProgram[]>([])
   useEffect(() => {
-    api.get<ProgramListResponse>("/programs?page=1&limit=100").then((r) => setPrograms(r.data)).catch(() => {})
+    api
+      .get<{ data: Array<{ program: TestProgram }>; pagination: unknown }>("/programs?page=1&limit=100")
+      .then((r) => setPrograms(r.data.map((d) => d.program)))
+      .catch(() => {})
   }, [])
   return programs
 }
@@ -68,8 +68,8 @@ function ReleasesPage() {
     setLoading(true)
     setError(null)
     api
-      .get<ReleaseListResponse>(`/releases/by-program/${selectedProgramId}`)
-      .then((r) => setReleases(r.data))
+      .get<{ releases: Release[] }>(`/releases/by-program/${selectedProgramId}`)
+      .then((r) => setReleases(r.releases))
       .catch((err: Error) => setError(err.message))
       .finally(() => setLoading(false))
   }, [selectedProgramId])
