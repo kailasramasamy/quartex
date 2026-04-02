@@ -7,6 +7,7 @@ COPY . .
 RUN pnpm install --force
 RUN pnpm build --filter=@quartex/api
 
+WORKDIR /app/apps/api
 EXPOSE 8080
 ENV PORT=8080
-CMD ["npx", "tsx", "apps/api/src/server.ts"]
+CMD ["npx", "tsx", "src/server.ts"]

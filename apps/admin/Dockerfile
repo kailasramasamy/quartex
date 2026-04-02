@@ -10,6 +10,7 @@ ARG VITE_API_URL=https://api.quartex.in/api/v1
 ENV VITE_API_URL=$VITE_API_URL
 RUN pnpm build:admin
 
+WORKDIR /app/apps/admin
 EXPOSE 8080
 ENV PORT=8080
-CMD ["node", "apps/admin/server.prod.js"]
+CMD ["node", "server.prod.js"]
