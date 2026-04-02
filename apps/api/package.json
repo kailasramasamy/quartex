@@ -14,18 +14,19 @@
     "db:seed": "tsx src/services/seed.ts"
   },
   "dependencies": {
-    "@quartex/shared": "workspace:*",
-    "fastify": "^5",
     "@fastify/cors": "^11",
-    "@fastify/multipart": "^9",
     "@fastify/jwt": "^9",
-    "drizzle-orm": "^0.44",
-    "postgres": "^3.4",
-    "zod": "^4",
+    "@fastify/multipart": "^9",
+    "@quartex/shared": "workspace:*",
     "argon2": "^0.43",
+    "dotenv": "^17.4.0",
+    "drizzle-orm": "^0.44",
+    "fastify": "^5",
+    "fastify-plugin": "^5",
     "node-cron": "^3",
     "nodemailer": "^7",
-    "fastify-plugin": "^5"
+    "postgres": "^3.4",
+    "zod": "^4"
   },
   "devDependencies": {
     "@types/node": "^22",

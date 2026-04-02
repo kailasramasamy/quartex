@@ -48,13 +48,13 @@ export default async function programRoutes(fastify: FastifyInstance): Promise<v
     const page = Math.max(1, Number(query.page ?? 1))
 
     const testerCountSq = db
-      .select({ programId: programTesters.programId, cnt: count().as("cnt") })
+      .select({ programId: programTesters.programId, testerCnt: count().as("tester_cnt") })
       .from(programTesters)
       .groupBy(programTesters.programId)
       .as("tc")
 
     const feedbackCountSq = db
-      .select({ programId: feedback.programId, cnt: count().as("cnt") })
+      .select({ programId: feedback.programId, feedbackCnt: count().as("feedback_cnt") })
       .from(feedback)
       .groupBy(feedback.programId)
       .as("fc")
@@ -64,8 +64,8 @@ export default async function programRoutes(fastify: FastifyInstance): Promise<v
     const rows = await db
       .select({
         program: testPrograms,
-        testerCount: sql<number>`coalesce(${testerCountSq.cnt}, 0)`,
-        feedbackCount: sql<number>`coalesce(${feedbackCountSq.cnt}, 0)`,
+        testerCount: sql<number>`coalesce(${testerCountSq.testerCnt}, 0)`,
+        feedbackCount: sql<number>`coalesce(${feedbackCountSq.feedbackCnt}, 0)`,
       })
       .from(testPrograms)
       .leftJoin(testerCountSq, eq(testPrograms.id, testerCountSq.programId))
