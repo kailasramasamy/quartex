@@ -1,0 +1,4 @@
+{
+  "start": "cd apps/web && node server.prod.js",
+  "build": "pnpm install --force && pnpm build:web"
+}
