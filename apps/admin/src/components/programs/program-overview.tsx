@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Copy, Check } from "lucide-react"
+import { Copy, Check, Trash2 } from "lucide-react"
 import { Button } from "~/components/ui/button"
 import { StatusBadge } from "~/components/programs/status-badge"
 import { api } from "~/lib/api"
@@ -12,6 +12,7 @@ interface ProgramOverviewProps {
   releaseCount: number
   onStatusChange: (program: TestProgram) => void
   onEditClick: () => void
+  onDelete: () => void
 }
 
 interface StatPill {
@@ -65,12 +66,16 @@ function InviteLinkRow({ code }: { code: string }) {
   )
 }
 
-function OverviewHeader({ program, action, isUpdating, onEditClick, onStatusUpdate }: {
+const canDelete = (status: ProgramStatus) => status === "draft" || status === "cancelled"
+
+function OverviewHeader({ program, action, isUpdating, isDeleting, onEditClick, onStatusUpdate, onDelete }: {
   program: TestProgram
   action: ReturnType<typeof nextAction>
   isUpdating: boolean
+  isDeleting: boolean
   onEditClick: () => void
   onStatusUpdate: () => void
+  onDelete: () => void
 }) {
   return (
     <div className="flex items-start justify-between gap-4">
@@ -82,6 +87,12 @@ function OverviewHeader({ program, action, isUpdating, onEditClick, onStatusUpda
         {program.description && <p className="text-sm text-text-secondary max-w-prose">{program.description}</p>}
       </div>
       <div className="flex gap-2 flex-shrink-0">
+        {canDelete(program.status as ProgramStatus) && (
+          <Button variant="danger" size="sm" onClick={onDelete} disabled={isDeleting}>
+            <Trash2 size={14} />
+            {isDeleting ? "Deleting..." : "Delete"}
+          </Button>
+        )}
         <Button variant="secondary" size="sm" onClick={onEditClick}>Edit</Button>
         {action && (
           <Button size="sm" onClick={onStatusUpdate} disabled={isUpdating}>
@@ -93,8 +104,9 @@ function OverviewHeader({ program, action, isUpdating, onEditClick, onStatusUpda
   )
 }
 
-function ProgramOverview({ program, testerCount, feedbackCount, releaseCount, onStatusChange, onEditClick }: ProgramOverviewProps) {
+function ProgramOverview({ program, testerCount, feedbackCount, releaseCount, onStatusChange, onEditClick, onDelete }: ProgramOverviewProps) {
   const [isUpdating, setIsUpdating] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
   const action = nextAction(program.status)
 
   const handleStatusUpdate = async () => {
@@ -111,9 +123,22 @@ function ProgramOverview({ program, testerCount, feedbackCount, releaseCount, on
     }
   }
 
+  const handleDelete = async () => {
+    if (!confirm("Are you sure you want to delete this program?")) return
+    setIsDeleting(true)
+    try {
+      await api.delete(`/programs/${program.id}`)
+      onDelete()
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setIsDeleting(false)
+    }
+  }
+
   return (
     <div className="space-y-6">
-      <OverviewHeader program={program} action={action} isUpdating={isUpdating} onEditClick={onEditClick} onStatusUpdate={handleStatusUpdate} />
+      <OverviewHeader program={program} action={action} isUpdating={isUpdating} isDeleting={isDeleting} onEditClick={onEditClick} onStatusUpdate={handleStatusUpdate} onDelete={handleDelete} />
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <StatPill label="Testers" value={testerCount} />
         <StatPill label="Feedback" value={feedbackCount} />

@@ -76,6 +76,7 @@ function ProgramDetailPage() {
             releaseCount={releaseCount}
             onStatusChange={setProgram}
             onEditClick={() => navigate({ to: "/programs/$id/edit", params: { id } })}
+            onDelete={() => navigate({ to: "/programs" })}
           />
         )}
         {activeTab === "testers" && (

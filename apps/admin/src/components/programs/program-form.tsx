@@ -70,6 +70,7 @@ function TestLinks({ platforms, links, onChange }: {
 
 interface FormFields {
   form: Partial<TestProgram>
+  isCustom: boolean
   set: (key: keyof TestProgram, value: unknown) => void
   handleAppChange: (value: string) => void
   handleLinkChange: (key: string, value: string) => void
@@ -77,12 +78,16 @@ interface FormFields {
   isLoading: boolean
 }
 
-function FormBody({ form, set, handleAppChange, handleLinkChange, handleSubmit, isLoading }: FormFields) {
-  const isCustom = form.appId === "custom"
+function FormBody({ form, isCustom, set, handleAppChange, handleLinkChange, handleSubmit, isLoading }: FormFields) {
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <Select label="App" options={[{ value: "", label: "Select app..." }, ...APP_OPTIONS]} value={form.appId ?? ""} onChange={(e) => handleAppChange(e.target.value)} />
-      {isCustom && <Input label="App Name" value={form.appName ?? ""} onChange={(e) => set("appName", e.target.value)} placeholder="My App" required />}
+      <Select label="App" options={[{ value: "", label: "Select app..." }, ...APP_OPTIONS]} value={isCustom ? "custom" : (form.appId ?? "")} onChange={(e) => handleAppChange(e.target.value)} />
+      {isCustom && (
+        <div className="grid grid-cols-2 gap-4">
+          <Input label="App ID (slug)" value={form.appId ?? ""} onChange={(e) => set("appId", e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ""))} placeholder="my-app" required />
+          <Input label="App Name" value={form.appName ?? ""} onChange={(e) => set("appName", e.target.value)} placeholder="My App" required />
+        </div>
+      )}
       <div className="flex flex-col gap-1.5">
         <label className="text-sm font-medium text-text-secondary">Description</label>
         <textarea value={form.description ?? ""} onChange={(e) => set("description", e.target.value)} rows={3} className="w-full rounded-lg border border-border bg-bg-primary px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent resize-none" placeholder="What are testers testing?" />
@@ -106,6 +111,9 @@ function FormBody({ form, set, handleAppChange, handleLinkChange, handleSubmit, 
 }
 
 function ProgramForm({ initialData = {}, onSubmit, isLoading }: ProgramFormProps) {
+  const knownIds: string[] = QUARTEX_APPS.map((a) => a.id)
+  const initialIsCustom = !!initialData.appId && !knownIds.includes(initialData.appId)
+
   const [form, setForm] = useState<Partial<TestProgram>>({
     appId: initialData.appId ?? "",
     appName: initialData.appName ?? "",
@@ -119,13 +127,20 @@ function ProgramForm({ initialData = {}, onSubmit, isLoading }: ProgramFormProps
     iosTestLink: initialData.iosTestLink ?? "",
     webTestLink: initialData.webTestLink ?? "",
   })
+  const [isCustom, setIsCustom] = useState(initialIsCustom)
 
   const set = (key: keyof TestProgram, value: unknown) =>
     setForm((prev) => ({ ...prev, [key]: value }))
 
   const handleAppChange = (value: string) => {
-    const app = QUARTEX_APPS.find((a) => a.id === value)
-    setForm((prev) => ({ ...prev, appId: value, appName: app?.name ?? prev.appName }))
+    if (value === "custom") {
+      setIsCustom(true)
+      setForm((prev) => ({ ...prev, appId: "", appName: "" }))
+    } else {
+      setIsCustom(false)
+      const app = QUARTEX_APPS.find((a) => a.id === value)
+      setForm((prev) => ({ ...prev, appId: value, appName: app?.name ?? prev.appName }))
+    }
   }
 
   const handleLinkChange = (key: string, value: string) =>
@@ -139,6 +154,7 @@ function ProgramForm({ initialData = {}, onSubmit, isLoading }: ProgramFormProps
   return (
     <FormBody
       form={form}
+      isCustom={isCustom}
       set={set}
       handleAppChange={handleAppChange}
       handleLinkChange={handleLinkChange}
