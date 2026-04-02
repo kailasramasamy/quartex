@@ -42,8 +42,8 @@ function useReleaseForm(programId: string, onCreated: (r: Release) => void, onCl
     e.preventDefault()
     setIsLoading(true)
     try {
-      const created = await api.post<Release>("/releases", { ...form, programId })
-      onCreated(created)
+      const res = await api.post<{ release: Release }>(`/releases/by-program/${programId}`, form)
+      onCreated(res.release)
       onClose()
     } catch (err) {
       console.error(err)
@@ -120,8 +120,8 @@ function useReleasesData(programId: string, onCountChange: (n: number) => void) 
 
   useEffect(() => {
     setIsLoading(true)
-    api.get<Release[]>(`/releases/by-program/${programId}`)
-      .then((data) => { setReleases(data); onCountChange(data.length) })
+    api.get<{ releases: Release[] }>(`/releases/by-program/${programId}`)
+      .then((res) => { setReleases(res.releases); onCountChange(res.releases.length) })
       .catch(console.error)
       .finally(() => setIsLoading(false))
   }, [programId, onCountChange])

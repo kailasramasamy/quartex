@@ -17,7 +17,6 @@ interface DashboardStats {
 }
 
 interface ActivityItem {
-  id: string
   type: string
   message: string
   timestamp: string
@@ -53,8 +52,8 @@ function DashboardPage() {
   const [activity, setActivity] = useState<ActivityItem[]>([])
 
   useEffect(() => {
-    api.get<DashboardStats>("/dashboard").then(setStats).catch(console.error)
-    api.get<ActivityItem[]>("/dashboard/activity").then(setActivity).catch(console.error)
+    api.get<{ stats: DashboardStats }>("/dashboard").then((r) => setStats(r.stats)).catch(console.error)
+    api.get<{ activity: ActivityItem[] }>("/dashboard/activity").then((r) => setActivity(r.activity)).catch(console.error)
   }, [])
 
   return (
@@ -79,8 +78,8 @@ function DashboardPage() {
           <p className="text-sm text-text-muted py-4 text-center">No recent activity.</p>
         ) : (
           <div>
-            {activity.map((item) => (
-              <ActivityRow key={item.id} item={item} />
+            {activity.map((item, i) => (
+              <ActivityRow key={`${item.type}-${i}`} item={item} />
             ))}
           </div>
         )}

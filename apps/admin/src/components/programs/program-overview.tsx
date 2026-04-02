@@ -35,16 +35,16 @@ function daysRemaining(program: TestProgram): string {
   return days > 0 ? `${days}d` : "Ended"
 }
 
-function nextAction(status: ProgramStatus): { label: string; next: ProgramStatus } | null {
-  if (status === "draft") return { label: "Open Program", next: "open" }
-  if (status === "open") return { label: "Start Testing", next: "in_progress" }
-  if (status === "in_progress") return { label: "Complete", next: "completed" }
+function nextAction(status: ProgramStatus): { label: string; endpoint: string } | null {
+  if (status === "draft") return { label: "Open Program", endpoint: "open" }
+  if (status === "open") return { label: "Start Testing", endpoint: "start" }
+  if (status === "in_progress") return { label: "Complete", endpoint: "complete" }
   return null
 }
 
 function InviteLinkRow({ code }: { code: string }) {
   const [copied, setCopied] = useState(false)
-  const link = `${window.location.origin}/join/${code}`
+  const link = `${window.location.origin.replace(':3001', ':3000')}/beta/${code}`
 
   const copy = async () => {
     await navigator.clipboard.writeText(link)
@@ -101,8 +101,9 @@ function ProgramOverview({ program, testerCount, feedbackCount, releaseCount, on
     if (!action) return
     setIsUpdating(true)
     try {
-      const updated = await api.put<TestProgram>(`/programs/${program.id}`, { status: action.next })
-      onStatusChange(updated)
+      const res = await api.post<{ program: TestProgram } | TestProgram>(`/programs/${program.id}/${action.endpoint}`)
+      const updated = "program" in res ? res.program : res
+      onStatusChange(updated as TestProgram)
     } catch (err) {
       console.error(err)
     } finally {

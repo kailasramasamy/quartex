@@ -32,8 +32,13 @@ function ProgramDetailPage() {
   useEffect(() => {
     setIsLoading(true)
     api
-      .get<TestProgram>(`/programs/${id}`)
-      .then(setProgram)
+      .get<{ program: TestProgram; stats: { totalTesters: number; totalFeedback: number; totalReleases: number } }>(`/programs/${id}`)
+      .then((r) => {
+        setProgram(r.program)
+        setTesterCount(r.stats.totalTesters ?? 0)
+        setFeedbackCount(r.stats.totalFeedback ?? 0)
+        setReleaseCount(r.stats.totalReleases ?? 0)
+      })
       .catch(console.error)
       .finally(() => setIsLoading(false))
   }, [id])

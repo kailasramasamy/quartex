@@ -30,8 +30,8 @@ function ProgramsPage() {
   useEffect(() => {
     setIsLoading(true)
     api
-      .get<TestProgram[]>("/programs")
-      .then(setPrograms)
+      .get<{ data: Array<{ program: TestProgram; testerCount: number; feedbackCount: number }>; pagination: unknown }>("/programs")
+      .then((r) => setPrograms(r.data.map((d) => d.program)))
       .catch(console.error)
       .finally(() => setIsLoading(false))
   }, [])

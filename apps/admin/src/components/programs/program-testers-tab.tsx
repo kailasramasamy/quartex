@@ -81,10 +81,10 @@ function ProgramTestersTab({ programId, onCountChange }: ProgramTestersTabProps)
   useEffect(() => {
     setIsLoading(true)
     api
-      .get<TesterRow[]>(`/testers/by-program/${programId}`)
-      .then((data) => {
-        setTesters(data)
-        onCountChange(data.length)
+      .get<{ data: TesterRow[]; pagination: { total: number } }>(`/testers/by-program/${programId}`)
+      .then((res) => {
+        setTesters(res.data)
+        onCountChange(res.pagination.total)
       })
       .catch(console.error)
       .finally(() => setIsLoading(false))

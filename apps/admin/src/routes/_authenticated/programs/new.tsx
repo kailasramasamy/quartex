@@ -20,8 +20,8 @@ function NewProgramPage() {
     setIsLoading(true)
     setError(null)
     try {
-      const created = await api.post<TestProgram>("/programs", data)
-      navigate({ to: "/programs/$id", params: { id: created.id } })
+      const res = await api.post<{ program: TestProgram }>("/programs", data)
+      navigate({ to: "/programs/$id", params: { id: res.program.id } })
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to create program")
     } finally {
