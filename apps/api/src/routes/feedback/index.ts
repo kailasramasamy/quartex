@@ -1,6 +1,6 @@
 import type { FastifyInstance } from "fastify"
 import { db } from "../../db/index.js"
-import { feedback, feedbackAttachments, programTesters, testers } from "../../db/schema/index.js"
+import { feedback, feedbackAttachments, programTesters, testers, testPrograms } from "../../db/schema/index.js"
 import { eq, and, desc } from "drizzle-orm"
 import { authenticate } from "../../middleware/auth.js"
 import { notFound, badRequest } from "../../lib/errors.js"
@@ -40,6 +40,37 @@ async function listByProgram(request: FastifyRequest<ProgramParams>) {
 }
 
 export default async function feedbackRoutes(app: FastifyInstance): Promise<void> {
+  // Global feedback list (all programs)
+  app.get("/", { preHandler: [authenticate] }, async (request, reply) => {
+    const { category, status, priority, page, limit } = request.query as Record<string, string>
+    const { offset, limit: lim } = paginate({ page, limit })
+
+    const conditions = []
+    if (category) conditions.push(eq(feedback.category, category))
+    if (status) conditions.push(eq(feedback.status, status))
+    if (priority) conditions.push(eq(feedback.priority, priority))
+
+    const where = conditions.length > 0 ? and(...conditions) : undefined
+
+    const rows = await db
+      .select({
+        feedback,
+        testerName: testers.name,
+        testerEmail: testers.email,
+        programName: testPrograms.appName,
+      })
+      .from(feedback)
+      .innerJoin(testers, eq(testers.id, feedback.testerId))
+      .innerJoin(testPrograms, eq(testPrograms.id, feedback.programId))
+      .where(where)
+      .orderBy(desc(feedback.createdAt))
+      .limit(lim)
+      .offset(offset)
+
+    const total = await db.$count(feedback, where)
+    return reply.send(paginatedResponse({ data: rows, total, page: Number(page ?? 1), limit: lim }))
+  })
+
   app.get<ProgramParams>(
     "/by-program/:programId",
     { preHandler: [authenticate] },

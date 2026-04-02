@@ -39,15 +39,19 @@ function FeedbackPage() {
   const [selectedProgramId, setSelectedProgramId] = useState("")
   const [feedback, setFeedback] = useState<Feedback[]>([])
   const [filters, setFilters] = useState<FeedbackFilterValues>({})
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!selectedProgramId) return
     setLoading(true)
     setError(null)
+
+    const url = selectedProgramId
+      ? `/feedback/by-program/${selectedProgramId}`
+      : "/feedback"
+
     api
-      .get<{ data: Array<{ feedback: Feedback }>; pagination: unknown }>(`/feedback/by-program/${selectedProgramId}`)
+      .get<{ data: Array<{ feedback: Feedback; programName?: string }>; pagination: unknown }>(url)
       .then((r) => setFeedback(r.data.map((d) => d.feedback)))
       .catch((err: Error) => setError(err.message))
       .finally(() => setLoading(false))
@@ -56,7 +60,7 @@ function FeedbackPage() {
   const filtered = useMemo(() => applyFilters(feedback, filters), [feedback, filters])
 
   const programOptions = [
-    { value: "", label: "Select a program..." },
+    { value: "", label: "All Programs" },
     ...programs.map((p) => ({ value: p.id, label: p.appName })),
   ]
 
@@ -72,21 +76,17 @@ function FeedbackPage() {
           onChange={(e) => setSelectedProgramId(e.target.value)}
           className="w-56"
         />
-        {selectedProgramId && <FeedbackFilters onFilterChange={setFilters} current={filters} />}
+        <FeedbackFilters onFilterChange={setFilters} current={filters} />
       </div>
 
-      {!selectedProgramId && (
-        <EmptyState icon={MessageSquare} title="Select a program" description="Choose a program above to view its feedback." />
-      )}
+      {loading && <p className="text-sm text-text-muted">Loading feedback...</p>}
+      {error && <p className="text-sm text-red-400">{error}</p>}
 
-      {selectedProgramId && loading && <p className="text-sm text-text-muted">Loading feedback...</p>}
-      {selectedProgramId && error && <p className="text-sm text-red-400">{error}</p>}
-
-      {selectedProgramId && !loading && !error && filtered.length === 0 && (
+      {!loading && !error && filtered.length === 0 && (
         <EmptyState icon={MessageSquare} title="No feedback found" description="No feedback matches the current filters." />
       )}
 
-      {selectedProgramId && !loading && !error && filtered.length > 0 && (
+      {!loading && !error && filtered.length > 0 && (
         <FeedbackTable
           feedbackItems={filtered}
           onRowClick={(id) => navigate({ to: "/feedback/$id", params: { id } })}
