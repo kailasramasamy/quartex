@@ -4,6 +4,12 @@ export interface ProductFeature {
   description: string
 }
 
+export interface ProductLinks {
+  appStore?: string
+  playStore?: string | "coming-soon"
+  web?: string
+}
+
 export interface Product {
   id: string
   name: string
@@ -14,4 +20,5 @@ export interface Product {
   color: string
   iconName: string
   status: "live" | "beta" | "coming-soon"
+  links?: ProductLinks
 }

@@ -1,5 +1,6 @@
 import type { Product } from "@quartex/shared"
 import { Button } from "~/components/button"
+import { Apple, Play } from "lucide-react"
 
 const statusConfig = {
   live: { label: "Live", className: "bg-emerald-500/15 text-emerald-400" },
@@ -9,10 +10,6 @@ const statusConfig = {
     className: "bg-bg-secondary text-text-muted",
   },
 } satisfies Record<Product["status"], { label: string; className: string }>
-
-interface ProductHeroProps {
-  product: Product
-}
 
 function StatusBadge({ status }: { status: Product["status"] }) {
   const { label, className } = statusConfig[status]
@@ -25,8 +22,69 @@ function StatusBadge({ status }: { status: Product["status"] }) {
   )
 }
 
-function ProductHero({ product }: ProductHeroProps) {
+function DownloadLinks({ product }: { product: Product }) {
+  const links = product.links
+  if (!links) return null
+
+  const hasAppStore = !!links.appStore
+  const hasPlayStore = links.playStore && links.playStore !== "coming-soon"
+  const playStoreComingSoon = links.playStore === "coming-soon"
+
+  if (!hasAppStore && !hasPlayStore && !playStoreComingSoon) return null
+
+  return (
+    <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+      {hasAppStore && (
+        <a
+          href={links.appStore}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-3 bg-white text-black px-6 py-3.5 rounded-xl hover:bg-gray-100 transition-colors"
+        >
+          <Apple size={24} />
+          <div className="text-left">
+            <div className="text-[10px] leading-tight">Download on the</div>
+            <div className="text-base font-semibold leading-tight">App Store</div>
+          </div>
+        </a>
+      )}
+      {hasPlayStore ? (
+        <a
+          href={links.playStore as string}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-3 bg-white text-black px-6 py-3.5 rounded-xl hover:bg-gray-100 transition-colors"
+        >
+          <Play size={24} fill="currentColor" />
+          <div className="text-left">
+            <div className="text-[10px] leading-tight">Get it on</div>
+            <div className="text-base font-semibold leading-tight">Google Play</div>
+          </div>
+        </a>
+      ) : playStoreComingSoon ? (
+        <div className="inline-flex items-center gap-3 bg-white/10 text-text-secondary px-6 py-3.5 rounded-xl border border-border cursor-default">
+          <Play size={24} />
+          <div className="text-left">
+            <div className="text-[10px] leading-tight">Coming soon on</div>
+            <div className="text-base font-semibold leading-tight">Google Play</div>
+          </div>
+        </div>
+      ) : null}
+    </div>
+  )
+}
+
+function DefaultCTA({ product }: { product: Product }) {
   const isBeta = product.status === "beta"
+  return (
+    <div className="mt-8">
+      <Button size="lg">{isBeta ? "Join Beta" : "Get Started"}</Button>
+    </div>
+  )
+}
+
+function ProductHero({ product }: { product: Product }) {
+  const hasLinks = product.links && (product.links.appStore || product.links.playStore || product.links.web)
 
   return (
     <section
@@ -47,9 +105,11 @@ function ProductHero({ product }: ProductHeroProps) {
           <p className="mt-6 text-base leading-relaxed text-text-secondary">
             {product.description}
           </p>
-          <div className="mt-8">
-            <Button size="lg">{isBeta ? "Join Beta" : "Get Started"}</Button>
-          </div>
+          {hasLinks ? (
+            <DownloadLinks product={product} />
+          ) : (
+            <DefaultCTA product={product} />
+          )}
         </div>
       </div>
     </section>
@@ -58,3 +118,6 @@ function ProductHero({ product }: ProductHeroProps) {
 
 export { ProductHero }
 export type { ProductHeroProps }
+interface ProductHeroProps {
+  product: Product
+}

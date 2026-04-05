@@ -11,6 +11,10 @@ import {
   Calendar,
   Brain,
   Shield,
+  Scan,
+  LayoutDashboard,
+  FolderLock,
+  Tags,
   Circle,
   type LucideIcon,
 } from "lucide-react"
@@ -29,6 +33,10 @@ const iconMap: Record<string, LucideIcon> = {
   Calendar,
   Brain,
   Shield,
+  Scan,
+  LayoutDashboard,
+  FolderLock,
+  Tags,
 }
 
 interface FeatureCardProps {
@@ -50,10 +58,10 @@ function FeatureCard({ feature, color }: FeatureCardProps) {
       >
         <Icon size={20} style={{ color }} />
       </div>
-      <h3 className="font-heading font-semibold text-text-primary">
+      <h3 className="font-heading text-lg font-semibold text-text-primary">
         {feature.title}
       </h3>
-      <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+      <p className="mt-2 text-base leading-relaxed text-text-secondary">
         {feature.description}
       </p>
     </div>

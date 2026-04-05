@@ -79,37 +79,53 @@ export const products: Product[] = [
     id: "renewd",
     name: "Renewd",
     slug: "renewd",
-    tagline: "AI-powered renewal tracking",
+    tagline: "AI-powered renewal and subscription tracker",
     description:
-      "Never miss a renewal again. Renewd uses AI to track subscriptions, contracts, and recurring payments — sending smart reminders before deadlines hit.",
+      "Renewd tracks all your subscriptions, insurance policies, memberships, and recurring payments in one place. Scan any document — AI extracts renewal details automatically. Get smart reminders, chat with AI about your renewals, and store documents securely in an encrypted vault.",
     features: [
+      {
+        icon: "Brain",
+        title: "AI Chat Assistant",
+        description:
+          "Ask questions about your renewals in natural language — upcoming dues, spending breakdown, and more",
+      },
+      {
+        icon: "Scan",
+        title: "Smart Document Scanning",
+        description:
+          "Scan or upload invoices, policies, and receipts — AI extracts renewal details automatically",
+      },
+      {
+        icon: "LayoutDashboard",
+        title: "Dashboard Overview",
+        description:
+          "See overdue, active, and upcoming renewals at a glance with total monthly spend",
+      },
+      {
+        icon: "FolderLock",
+        title: "Encrypted Vault",
+        description:
+          "AES-256 encrypted document storage — safely keep policies, invoices, and receipts",
+      },
       {
         icon: "Bell",
         title: "Smart Reminders",
         description:
-          "AI-timed notifications based on renewal urgency and history",
+          "Timely notifications based on urgency — overdue, due this week, due this month",
       },
       {
-        icon: "Calendar",
-        title: "Renewal Calendar",
+        icon: "Tags",
+        title: "Categories & Search",
         description:
-          "Visual timeline of all upcoming renewals across categories",
-      },
-      {
-        icon: "Brain",
-        title: "AI Categorization",
-        description:
-          "Automatic categorization and priority scoring of renewals",
-      },
-      {
-        icon: "Shield",
-        title: "Never Miss a Deadline",
-        description:
-          "Escalation chains and backup reminders for critical renewals",
+          "Organize by insurance, subscription, membership — search and filter across all renewals",
       },
     ],
     color: "#8B5CF6",
     iconName: "RefreshCw",
-    status: "beta",
+    status: "live",
+    links: {
+      appStore: "https://apps.apple.com/us/app/renewd/id6761368622",
+      playStore: "coming-soon",
+    },
   },
 ]

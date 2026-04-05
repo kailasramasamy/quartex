@@ -1,4 +1,4 @@
-export type { Product, ProductFeature } from "./types/product.js"
+export type { Product, ProductFeature, ProductLinks } from "./types/product.js"
 export type { SeoMeta } from "./types/seo.js"
 export type { NavLink } from "./constants/navigation.js"
 
