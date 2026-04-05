@@ -146,20 +146,18 @@ function AppScreenshots({ screenshots, color }: AppScreenshotsProps) {
         className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto"
         style={{ transform, opacity, transition }}
       >
-        {/* Phone mockup */}
+        {/* Screenshot */}
         <div className="flex justify-center">
           <div className="relative">
             <div
-              className="absolute -inset-4 rounded-[3rem] opacity-20 blur-2xl"
+              className="absolute -inset-4 rounded-[2rem] opacity-15 blur-2xl"
               style={{ backgroundColor: color }}
             />
-            <div className="relative rounded-[2.5rem] overflow-hidden border-2 border-border bg-black shadow-2xl">
-              <img
-                src={screen.src}
-                alt={screen.label}
-                className="w-[280px] h-auto"
-              />
-            </div>
+            <img
+              src={screen.src}
+              alt={screen.label}
+              className="relative w-[280px] h-auto drop-shadow-2xl"
+            />
           </div>
         </div>
 
