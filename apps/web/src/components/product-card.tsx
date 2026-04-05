@@ -64,7 +64,7 @@ function ProductCard({ product }: ProductCardProps) {
         </h3>
         <StatusBadge status={product.status} />
       </div>
-      <p className="text-sm leading-relaxed text-text-secondary">
+      <p className="text-base leading-relaxed text-text-secondary">
         {product.tagline}
       </p>
     </Link>
