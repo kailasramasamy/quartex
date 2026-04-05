@@ -123,6 +123,7 @@ export const products: Product[] = [
     color: "#8B5CF6",
     iconName: "RefreshCw",
     status: "live",
+    appIcon: "/screenshots/renewd/app-icon.png",
     links: {
       appStore: "https://apps.apple.com/us/app/renewd/id6761368622",
       playStore: "coming-soon",

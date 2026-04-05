@@ -20,5 +20,6 @@ export interface Product {
   color: string
   iconName: string
   status: "live" | "beta" | "coming-soon"
+  appIcon?: string
   links?: ProductLinks
 }

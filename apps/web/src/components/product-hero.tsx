@@ -95,6 +95,15 @@ function ProductHero({ product }: { product: Product }) {
     >
       <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
+          {product.appIcon && (
+            <div className="mb-6 flex justify-center">
+              <img
+                src={product.appIcon}
+                alt={`${product.name} icon`}
+                className="w-20 h-20 rounded-2xl shadow-lg"
+              />
+            </div>
+          )}
           <div className="mb-4">
             <StatusBadge status={product.status} />
           </div>
