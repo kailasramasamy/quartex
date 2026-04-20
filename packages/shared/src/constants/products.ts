@@ -40,7 +40,7 @@ export const products: Product[] = [
   },
   {
     id: "runq",
-    name: "RunQ",
+    name: "runQ",
     slug: "runq",
     tagline: "Operations finance platform for Indian SMEs",
     description:
@@ -85,7 +85,7 @@ export const products: Product[] = [
     ],
     color: "#6366F1",
     iconName: "Zap",
-    status: "beta",
+    status: "live",
     appIcon: "/screenshots/runq/logo.png",
     links: {
       web: "https://www.runq.in",

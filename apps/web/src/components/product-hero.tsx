@@ -107,17 +107,19 @@ function ProductHero({ product }: { product: Product }) {
             <div className="mb-6 flex justify-center">
               <img
                 src={product.appIcon}
-                alt={`${product.name} icon`}
-                className="w-20 h-20 rounded-2xl shadow-lg"
+                alt={`${product.name}`}
+                className="h-16 w-auto object-contain"
               />
             </div>
           )}
           <div className="mb-4">
             <StatusBadge status={product.status} />
           </div>
-          <h1 className="font-heading text-5xl font-bold text-text-primary">
-            {product.name}
-          </h1>
+          {!product.appIcon && (
+            <h1 className="font-heading text-5xl font-bold text-text-primary">
+              {product.name}
+            </h1>
+          )}
           <p className="mt-4 text-xl text-text-secondary">{product.tagline}</p>
           <p className="mt-6 text-base leading-relaxed text-text-secondary">
             {product.description}
