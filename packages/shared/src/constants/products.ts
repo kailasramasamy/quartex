@@ -42,38 +42,54 @@ export const products: Product[] = [
     id: "runq",
     name: "RunQ",
     slug: "runq",
-    tagline: "ERP for quick commerce operations",
+    tagline: "Operations finance platform for Indian SMEs",
     description:
-      "Enterprise resource planning built for the speed of quick commerce. Warehouse management, route optimization, vendor coordination, and financial tracking — designed for sub-30-minute delivery operations.",
+      "runq handles your daily financial operations — invoicing, bill processing, payments, banking, GST compliance, and reporting. AI-powered invoice extraction, bank reconciliation, and a Finance Agent that answers any question about your business. Works alongside Tally — runq for daily ops, Tally for CA compliance.",
     features: [
       {
-        icon: "Warehouse",
-        title: "Warehouse Management",
+        icon: "FileText",
+        title: "Invoicing & Billing",
         description:
-          "Multi-warehouse support with bin-level tracking and pick-pack workflows",
+          "GST-aware sales invoices, purchase bills, AI extraction from PDFs, 3-way matching, and bulk import",
       },
       {
-        icon: "Route",
-        title: "Route Optimization",
+        icon: "Landmark",
+        title: "Banking & Reconciliation",
         description:
-          "AI-powered delivery route planning for maximum efficiency",
+          "Multi-bank dashboard, statement import, AI-powered auto-categorization, and payment gateway reconciliation",
       },
       {
-        icon: "Users",
-        title: "Vendor Portal",
+        icon: "Brain",
+        title: "AI Finance Agent",
         description:
-          "Self-serve vendor onboarding, PO management, and payment tracking",
+          "Chat with AI about your finances — ask about cash flow, overdue invoices, vendor payments, and more",
       },
       {
-        icon: "IndianRupee",
-        title: "Financial Module",
+        icon: "Receipt",
+        title: "GST Compliance",
         description:
-          "Invoicing, reconciliation, and P&L tracking per dark store",
+          "GSTR-1/3B filing, GSTR-2B reconciliation, ITC tracking, and GSTIN validation via GSP",
+      },
+      {
+        icon: "BarChart3",
+        title: "Reports & Analytics",
+        description:
+          "P&L, Balance Sheet, Cash Flow, expense analytics, revenue analytics, and period comparisons",
+      },
+      {
+        icon: "Settings",
+        title: "Workflows & Approvals",
+        description:
+          "Multi-level approvals, vendor management, fixed assets, dunning, and CA portal access",
       },
     ],
-    color: "#F59E0B",
+    color: "#6366F1",
     iconName: "Zap",
     status: "beta",
+    appIcon: "/screenshots/runq/logo.png",
+    links: {
+      web: "https://www.runq.in",
+    },
   },
   {
     id: "renewd",

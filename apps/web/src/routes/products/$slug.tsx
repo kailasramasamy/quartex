@@ -6,6 +6,10 @@ import { FeatureGrid } from "~/components/feature-grid"
 import { AppScreenshots } from "~/components/app-screenshots"
 import type { Screenshot } from "~/components/app-screenshots"
 
+const PRODUCT_HERO_IMAGES: Record<string, string> = {
+  runq: "/screenshots/runq/dashboard.jpg",
+}
+
 const PRODUCT_SCREENSHOTS: Record<string, Screenshot[]> = {
   renewd: [
     {
@@ -126,14 +130,36 @@ export const Route = createFileRoute("/products/$slug")({
   component: ProductPage,
 })
 
+function HeroImage({ src, name, color }: { src: string; name: string; color: string }) {
+  return (
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16">
+      <div
+        className="overflow-hidden rounded-2xl border border-border shadow-2xl"
+        style={{
+          boxShadow: `0 25px 50px -12px ${color}30`,
+        }}
+      >
+        <img
+          src={src}
+          alt={`${name} dashboard`}
+          className="w-full"
+        />
+      </div>
+    </div>
+  )
+}
+
 function ProductPage() {
   const { product } = Route.useLoaderData()
   const screenshots = PRODUCT_SCREENSHOTS[product.slug]
+  const heroImage = PRODUCT_HERO_IMAGES[product.slug]
 
   return (
     <main>
       <ProductHero product={product} />
-      {screenshots ? (
+      {heroImage ? (
+        <HeroImage src={heroImage} name={product.name} color={product.color} />
+      ) : screenshots ? (
         <AppScreenshots screenshots={screenshots} color={product.color} />
       ) : (
         <ScreenshotPlaceholder

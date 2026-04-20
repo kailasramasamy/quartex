@@ -75,16 +75,24 @@ function DownloadLinks({ product }: { product: Product }) {
 }
 
 function DefaultCTA({ product }: { product: Product }) {
+  const webLink = product.links?.web
   const isBeta = product.status === "beta"
+
   return (
     <div className="mt-8">
-      <Button size="lg">{isBeta ? "Join Beta" : "Get Started"}</Button>
+      {webLink ? (
+        <a href={webLink} target="_blank" rel="noopener noreferrer">
+          <Button size="lg">Explore {product.name}</Button>
+        </a>
+      ) : (
+        <Button size="lg">{isBeta ? "Join Beta" : "Get Started"}</Button>
+      )}
     </div>
   )
 }
 
 function ProductHero({ product }: { product: Product }) {
-  const hasLinks = product.links && (product.links.appStore || product.links.playStore || product.links.web)
+  const hasAppLinks = product.links && (product.links.appStore || product.links.playStore)
 
   return (
     <section
@@ -114,7 +122,7 @@ function ProductHero({ product }: { product: Product }) {
           <p className="mt-6 text-base leading-relaxed text-text-secondary">
             {product.description}
           </p>
-          {hasLinks ? (
+          {hasAppLinks ? (
             <DownloadLinks product={product} />
           ) : (
             <DefaultCTA product={product} />
