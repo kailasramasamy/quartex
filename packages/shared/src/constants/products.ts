@@ -44,7 +44,7 @@ export const products: Product[] = [
     slug: "runq",
     tagline: "Operations finance platform for Indian SMEs",
     description:
-      "runq handles your daily financial operations — invoicing, bill processing, payments, banking, GST compliance, and reporting. AI-powered invoice extraction, bank reconciliation, and a Finance Agent that answers any question about your business. Works alongside Tally — runq for daily ops, Tally for CA compliance.",
+      "runQ handles your daily financial operations — invoicing, bill processing, payments, banking, GST compliance, and reporting. AI-powered invoice extraction, bank reconciliation, and a Finance Agent that answers any question about your business. Works alongside Tally — runQ for daily ops, Tally for CA compliance.",
     features: [
       {
         icon: "FileText",
