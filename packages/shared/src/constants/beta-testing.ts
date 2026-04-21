@@ -59,7 +59,7 @@ export const PLATFORM: Record<Platform, StatusConfig> = {
 
 export const QUARTEX_APPS = [
   { id: "martly", name: "Martly", color: "#10B981" },
-  { id: "runq", name: "RunQ", color: "#F59E0B" },
+  { id: "runq", name: "runQ", color: "#6366F1" },
   { id: "renewd", name: "Renewd", color: "#8B5CF6" },
 ] as const
 

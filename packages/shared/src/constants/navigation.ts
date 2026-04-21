@@ -11,7 +11,7 @@ export const mainNavLinks: NavLink[] = [
 
 export const productNavLinks: NavLink[] = [
   { label: "Martly", href: "/products/martly" },
-  { label: "RunQ", href: "/products/runq" },
+  { label: "runQ", href: "/products/runq" },
   { label: "Renewd", href: "/products/renewd" },
 ]
 
