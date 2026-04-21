@@ -15,6 +15,10 @@ import {
   LayoutDashboard,
   FolderLock,
   Tags,
+  FileText,
+  Landmark,
+  Receipt,
+  Settings,
   Circle,
   type LucideIcon,
 } from "lucide-react"
@@ -37,6 +41,10 @@ const iconMap: Record<string, LucideIcon> = {
   LayoutDashboard,
   FolderLock,
   Tags,
+  FileText,
+  Landmark,
+  Receipt,
+  Settings,
 }
 
 interface FeatureCardProps {
