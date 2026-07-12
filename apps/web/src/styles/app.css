@@ -19,6 +19,43 @@ html {
   scroll-behavior: smooth;
 }
 
+/* runQ product page motion */
+@keyframes runq-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes runq-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes runq-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(0, -24px, 0) scale(1.08);
+  }
+}
+.runq-fade-up {
+  animation: runq-fade-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .runq-fade-up {
+    animation: none;
+  }
+}
+
 body {
   font-family: var(--font-body);
   background-color: var(--color-bg-primary);
