@@ -89,7 +89,7 @@ export const products: Product[] = [
     ],
     color: "#10B981",
     iconName: "ShoppingBag",
-    status: "live",
+    status: "beta",
   },
   {
     id: "dhenu",
@@ -101,8 +101,8 @@ export const products: Product[] = [
     features: [],
     color: "#14A06B",
     iconName: "Milk",
-    status: "beta",
-    appIcon: "/screenshots/dhenu/logo.png",
+    status: "live",
+    appIcon: "/screenshots/dhenu/app-icon.png",
   },
   {
     id: "renewd",

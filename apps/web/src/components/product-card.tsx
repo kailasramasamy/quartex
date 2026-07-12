@@ -22,20 +22,31 @@ interface ProductCardProps {
   product: Product
 }
 
-function ProductIconBadge({
-  iconName,
-  color,
-}: {
-  iconName: string
-  color: string
-}) {
-  const Icon = iconMap[iconName] ?? ShoppingBag
+// Real app icons where we have them; others fall back to a tinted lucide badge.
+const appIcons: Record<string, string> = {
+  runq: "/screenshots/runq/app-icon.png",
+  dhenu: "/screenshots/dhenu/app-icon.png",
+  renewd: "/screenshots/renewd/app-icon.png",
+}
+
+function ProductIconBadge({ product }: { product: Product }) {
+  const appIcon = appIcons[product.slug]
+  if (appIcon) {
+    return (
+      <img
+        src={appIcon}
+        alt={`${product.name} app icon`}
+        className="mb-5 h-12 w-12 rounded-2xl shadow-lg ring-1 ring-white/10"
+      />
+    )
+  }
+  const Icon = iconMap[product.iconName] ?? ShoppingBag
   return (
     <div
-      className="mb-5 inline-flex rounded-xl p-3"
-      style={{ backgroundColor: `${color}20` }}
+      className="mb-5 inline-flex rounded-2xl p-3"
+      style={{ backgroundColor: `${product.color}20` }}
     >
-      <Icon size={24} style={{ color }} />
+      <Icon size={24} style={{ color: product.color }} />
     </div>
   )
 }
@@ -58,7 +69,7 @@ function ProductCard({ product }: ProductCardProps) {
       params={{ slug: product.slug }}
       className="group block rounded-2xl border border-border bg-bg-card p-6 transition-all duration-200 hover:border-accent hover:shadow-lg hover:shadow-accent/5"
     >
-      <ProductIconBadge iconName={product.iconName} color={product.color} />
+      <ProductIconBadge product={product} />
       <div className="mb-3 flex items-start justify-between gap-3">
         <h3 className="font-heading text-lg font-semibold text-text-primary">
           {product.name}

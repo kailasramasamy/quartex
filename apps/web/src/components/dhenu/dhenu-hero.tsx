@@ -5,11 +5,14 @@ import { DhenuMesh } from "./dhenu-mesh"
 import { PhoneFrame } from "./phone-frame"
 import { DH } from "./dhenu-data"
 
-function BetaBadge() {
+function LiveBadge() {
   return (
     <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-text-secondary backdrop-blur">
-      <span className="h-2 w-2 rounded-full" style={{ backgroundColor: DH.greenLight }} />
-      In pilot with dairy SMEs
+      <span className="relative flex h-2 w-2">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60" style={{ backgroundColor: DH.greenLight }} />
+        <span className="relative inline-flex h-2 w-2 rounded-full" style={{ backgroundColor: DH.greenLight }} />
+      </span>
+      Live · Milk procurement for dairy SMEs
     </span>
   )
 }
@@ -21,10 +24,16 @@ function DhenuHero({ product }: { product: Product }) {
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 pb-12 pt-28 sm:px-6 lg:grid-cols-2 lg:gap-8 lg:pt-32">
         <div className="text-center lg:text-left">
           <div className="runq-fade-up flex justify-center lg:justify-start" style={{ animationDelay: "0ms" }}>
-            <BetaBadge />
+            <LiveBadge />
           </div>
           <div className="runq-fade-up mt-6 flex items-center justify-center gap-3 lg:justify-start" style={{ animationDelay: "60ms" }}>
-            {product.appIcon && <img src={product.appIcon} alt="Dhenu" className="h-9 w-auto" />}
+            {product.appIcon && (
+              <img
+                src={product.appIcon}
+                alt="Dhenu app icon"
+                className="h-11 w-11 rounded-2xl shadow-lg ring-1 ring-white/10"
+              />
+            )}
             <span className="font-heading text-2xl font-bold text-text-primary">Dhenu</span>
           </div>
           <h1
