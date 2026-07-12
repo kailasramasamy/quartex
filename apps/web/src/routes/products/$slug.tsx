@@ -5,10 +5,11 @@ import { ScreenshotPlaceholder } from "~/components/screenshot-placeholder"
 import { FeatureGrid } from "~/components/feature-grid"
 import { AppScreenshots } from "~/components/app-screenshots"
 import type { Screenshot } from "~/components/app-screenshots"
+import { RunqProductPage } from "~/components/runq/runq-product-page"
 
-const PRODUCT_HERO_IMAGES: Record<string, string> = {
-  runq: "/screenshots/runq/dashboard.jpg",
-}
+// runQ renders through its own bespoke page (see ProductPage), so it no longer
+// needs an entry here.
+const PRODUCT_HERO_IMAGES: Record<string, string> = {}
 
 const PRODUCT_SCREENSHOTS: Record<string, Screenshot[]> = {
   renewd: [
@@ -151,6 +152,12 @@ function HeroImage({ src, name, color }: { src: string; name: string; color: str
 
 function ProductPage() {
   const { product } = Route.useLoaderData()
+
+  // runQ gets a bespoke, module-forward page; other products use the shared template.
+  if (product.slug === "runq") {
+    return <RunqProductPage product={product} />
+  }
+
   const screenshots = PRODUCT_SCREENSHOTS[product.slug]
   const heroImage = PRODUCT_HERO_IMAGES[product.slug]
 
