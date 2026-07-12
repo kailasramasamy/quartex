@@ -2,43 +2,6 @@ import type { Product } from "../types/product.js"
 
 export const products: Product[] = [
   {
-    id: "martly",
-    name: "Martly",
-    slug: "martly",
-    tagline: "Hyperlocal grocery delivery, simplified",
-    description:
-      "A full-stack grocery delivery platform built for Vrindavan. Customer app, delivery tracking, inventory management, and real-time order processing — all in one system.",
-    features: [
-      {
-        icon: "ShoppingCart",
-        title: "Smart Ordering",
-        description:
-          "Intuitive product browsing with category filters, search, and cart management",
-      },
-      {
-        icon: "Truck",
-        title: "Live Delivery Tracking",
-        description:
-          "Real-time GPS tracking for customers and delivery partners",
-      },
-      {
-        icon: "Package",
-        title: "Inventory Management",
-        description:
-          "Stock tracking, low-stock alerts, and supplier coordination",
-      },
-      {
-        icon: "BarChart3",
-        title: "Analytics Dashboard",
-        description:
-          "Sales trends, delivery metrics, and customer insights at a glance",
-      },
-    ],
-    color: "#10B981",
-    iconName: "ShoppingBag",
-    status: "live",
-  },
-  {
     id: "runq",
     name: "runQ",
     slug: "runq",
@@ -90,6 +53,56 @@ export const products: Product[] = [
     links: {
       web: "https://www.runq.in",
     },
+  },
+  {
+    id: "martly",
+    name: "Martly",
+    slug: "martly",
+    tagline: "Hyperlocal grocery delivery, simplified",
+    description:
+      "A full-stack grocery delivery platform built for Vrindavan. Customer app, delivery tracking, inventory management, and real-time order processing — all in one system.",
+    features: [
+      {
+        icon: "ShoppingCart",
+        title: "Smart Ordering",
+        description:
+          "Intuitive product browsing with category filters, search, and cart management",
+      },
+      {
+        icon: "Truck",
+        title: "Live Delivery Tracking",
+        description:
+          "Real-time GPS tracking for customers and delivery partners",
+      },
+      {
+        icon: "Package",
+        title: "Inventory Management",
+        description:
+          "Stock tracking, low-stock alerts, and supplier coordination",
+      },
+      {
+        icon: "BarChart3",
+        title: "Analytics Dashboard",
+        description:
+          "Sales trends, delivery metrics, and customer insights at a glance",
+      },
+    ],
+    color: "#10B981",
+    iconName: "ShoppingBag",
+    status: "live",
+  },
+  {
+    id: "dhenu",
+    name: "Dhenu",
+    slug: "dhenu",
+    tagline: "Milk procurement, digitised for dairy SMEs",
+    description:
+      "From the farmer's pour to the processing plant — Dhenu runs milk collection, quality-based pricing, dispatch, and farmer payouts on one phone. Built for dairy cooperatives and private dairies.",
+    features: [],
+    color: "#14A06B",
+    iconName: "Milk",
+    status: "beta",
+    appIcon: "/screenshots/dhenu/logo.png",
   },
   {
     id: "renewd",

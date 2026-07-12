@@ -10,8 +10,9 @@ export const mainNavLinks: NavLink[] = [
 ]
 
 export const productNavLinks: NavLink[] = [
-  { label: "Martly", href: "/products/martly" },
   { label: "runQ", href: "/products/runq" },
+  { label: "Martly", href: "/products/martly" },
+  { label: "Dhenu", href: "/products/dhenu" },
   { label: "Renewd", href: "/products/renewd" },
 ]
 

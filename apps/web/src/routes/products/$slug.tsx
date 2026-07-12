@@ -6,6 +6,7 @@ import { FeatureGrid } from "~/components/feature-grid"
 import { AppScreenshots } from "~/components/app-screenshots"
 import type { Screenshot } from "~/components/app-screenshots"
 import { RunqProductPage } from "~/components/runq/runq-product-page"
+import { DhenuProductPage } from "~/components/dhenu/dhenu-product-page"
 
 // runQ renders through its own bespoke page (see ProductPage), so it no longer
 // needs an entry here.
@@ -153,9 +154,12 @@ function HeroImage({ src, name, color }: { src: string; name: string; color: str
 function ProductPage() {
   const { product } = Route.useLoaderData()
 
-  // runQ gets a bespoke, module-forward page; other products use the shared template.
+  // runQ and Dhenu get bespoke pages; other products use the shared template.
   if (product.slug === "runq") {
     return <RunqProductPage product={product} />
+  }
+  if (product.slug === "dhenu") {
+    return <DhenuProductPage product={product} />
   }
 
   const screenshots = PRODUCT_SCREENSHOTS[product.slug]
@@ -174,7 +178,9 @@ function ProductPage() {
           color={product.color}
         />
       )}
-      <FeatureGrid features={product.features} color={product.color} />
+      {product.features.length > 0 && (
+        <FeatureGrid features={product.features} color={product.color} />
+      )}
     </main>
   )
 }

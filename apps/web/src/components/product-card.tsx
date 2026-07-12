@@ -1,11 +1,12 @@
 import { Link } from "@tanstack/react-router"
-import { ShoppingBag, Zap, RefreshCw, type LucideIcon } from "lucide-react"
+import { ShoppingBag, Zap, RefreshCw, Milk, type LucideIcon } from "lucide-react"
 import type { Product } from "@quartex/shared"
 
 const iconMap: Record<string, LucideIcon> = {
   ShoppingBag,
   Zap,
   RefreshCw,
+  Milk,
 }
 
 const statusConfig = {

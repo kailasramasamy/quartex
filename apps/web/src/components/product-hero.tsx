@@ -78,6 +78,16 @@ function DefaultCTA({ product }: { product: Product }) {
   const webLink = product.links?.web
   const isBeta = product.status === "beta"
 
+  // No web link on a coming-soon product would render a dead button — show a
+  // simple status line instead.
+  if (!webLink && product.status === "coming-soon") {
+    return (
+      <p className="mt-8 text-sm font-medium text-text-muted">
+        Launching soon — <a href="/contact" className="text-accent hover:underline">get in touch</a>
+      </p>
+    )
+  }
+
   return (
     <div className="mt-8">
       {webLink ? (
