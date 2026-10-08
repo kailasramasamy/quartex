@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router"
-import { ShoppingBag, Zap, RefreshCw, Milk, type LucideIcon } from "lucide-react"
+import { ArrowRight, ShoppingBag, Zap, RefreshCw, Milk, type LucideIcon } from "lucide-react"
 import type { Product } from "@quartex/shared"
+import { ProductCardVisual } from "~/components/product-card-visual"
 
 const iconMap: Record<string, LucideIcon> = {
   ShoppingBag,
@@ -22,9 +23,10 @@ interface ProductCardProps {
   product: Product
 }
 
-// Real app icons where we have them; others fall back to a tinted lucide badge.
+// Square app icons (product.appIcon can be a wide logo, e.g. runQ's).
 const appIcons: Record<string, string> = {
   runq: "/screenshots/runq/app-icon.png",
+  martly: "/screenshots/martly/app-icon.png",
   dhenu: "/screenshots/dhenu/app-icon.png",
   renewd: "/screenshots/renewd/app-icon.png",
 }
@@ -36,14 +38,14 @@ function ProductIconBadge({ product }: { product: Product }) {
       <img
         src={appIcon}
         alt={`${product.name} app icon`}
-        className="mb-5 h-12 w-12 rounded-2xl shadow-lg ring-1 ring-white/10"
+        className="h-12 w-12 shrink-0 rounded-2xl shadow-lg ring-1 ring-white/10"
       />
     )
   }
   const Icon = iconMap[product.iconName] ?? ShoppingBag
   return (
     <div
-      className="mb-5 inline-flex rounded-2xl p-3"
+      className="inline-flex shrink-0 rounded-2xl p-3"
       style={{ backgroundColor: `${product.color}20` }}
     >
       <Icon size={24} style={{ color: product.color }} />
@@ -67,18 +69,26 @@ function ProductCard({ product }: ProductCardProps) {
     <Link
       to="/products/$slug"
       params={{ slug: product.slug }}
-      className="group block rounded-2xl border border-border bg-bg-card p-6 transition-all duration-200 hover:border-accent hover:shadow-lg hover:shadow-accent/5"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-bg-card transition-all duration-300 hover:-translate-y-1 hover:border-white/20"
+      style={{ boxShadow: `0 24px 60px -30px ${product.color}66` }}
     >
-      <ProductIconBadge product={product} />
-      <div className="mb-3 flex items-start justify-between gap-3">
-        <h3 className="font-heading text-lg font-semibold text-text-primary">
-          {product.name}
-        </h3>
-        <StatusBadge status={product.status} />
+      <ProductCardVisual product={product} />
+      <div className="flex flex-1 flex-col p-6">
+        <div className="flex items-center gap-4">
+          <ProductIconBadge product={product} />
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2.5">
+              <h3 className="font-heading text-xl font-semibold text-text-primary">{product.name}</h3>
+              <StatusBadge status={product.status} />
+            </div>
+            <p className="mt-1 text-sm leading-relaxed text-text-secondary">{product.tagline}</p>
+          </div>
+        </div>
+        <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-text-primary">
+          Explore {product.name}
+          <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" style={{ color: product.color }} />
+        </span>
       </div>
-      <p className="text-base leading-relaxed text-text-secondary">
-        {product.tagline}
-      </p>
     </Link>
   )
 }
