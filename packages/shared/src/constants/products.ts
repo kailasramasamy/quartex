@@ -58,37 +58,38 @@ export const products: Product[] = [
     id: "martly",
     name: "Martly",
     slug: "martly",
-    tagline: "Hyperlocal grocery delivery, simplified",
+    tagline: "Your neighbourhood stores, delivered in minutes",
     description:
-      "A full-stack grocery delivery platform built for Vrindavan. Customer app, delivery tracking, inventory management, and real-time order processing — all in one system.",
+      "A grocery delivery app and platform for local stores. Customers shop 1,300+ groceries and essentials from stores near them, with fast delivery, store pickup and Mart Plus savings; stores get an admin panel, rider tools and a ready catalog.",
     features: [
       {
         icon: "ShoppingCart",
-        title: "Smart Ordering",
+        title: "Shop Local Stores",
         description:
-          "Intuitive product browsing with category filters, search, and cart management",
+          "1,300+ groceries from nearby stores, with Buy Again, pack sizes and voice search",
       },
       {
         icon: "Truck",
-        title: "Live Delivery Tracking",
+        title: "Delivery or Pickup",
         description:
-          "Real-time GPS tracking for customers and delivery partners",
+          "Fast home delivery with live order tracking, or collect from the store",
       },
       {
         icon: "Package",
-        title: "Inventory Management",
+        title: "Store Admin Panel",
         description:
-          "Stock tracking, low-stock alerts, and supplier coordination",
+          "Per-store prices and stock, orders, riders, delivery zones and promotions",
       },
       {
         icon: "BarChart3",
-        title: "Analytics Dashboard",
+        title: "Insights & Loyalty",
         description:
-          "Sales trends, delivery metrics, and customer insights at a glance",
+          "Sales dashboards, demand forecasts, loyalty points and Mart Plus membership",
       },
     ],
-    color: "#10B981",
+    color: "#0F766E",
     iconName: "ShoppingBag",
+    appIcon: "/screenshots/martly/app-icon.png",
     status: "beta",
   },
   {
