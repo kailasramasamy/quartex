@@ -59,7 +59,8 @@ const FAQ: LegalSectionData[] = [
   {
     heading: "How do I delete my account?",
     paragraphs: [
-      `Email ${SUPPORT_EMAIL} with your registered mobile number and we will delete your account and personal data within 30 days, except records we are legally required to keep.`,
+      "In the app, go to Account → Delete account and confirm with the code we send to your phone. Your account is deleted immediately; invoices and order records are kept without your personal details, as required by law. Any wallet balance, loyalty points and Mart Plus membership are lost.",
+      `Can't open the app? Email ${SUPPORT_EMAIL} with your registered mobile number and we will delete your account within 30 days.`,
     ],
   },
 ]

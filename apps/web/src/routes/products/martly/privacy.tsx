@@ -59,7 +59,7 @@ const SECTIONS: LegalSectionData[] = [
   {
     heading: "How long we keep it",
     paragraphs: [
-      "We keep your information while your account is active. If you delete your account, we delete or anonymise your personal information within 30 days, except records we must keep longer under tax, accounting or other legal requirements, such as invoices for completed orders.",
+      "We keep your information while your account is active. When you delete your account, we immediately delete or anonymise your personal information, except records we must keep longer under tax, accounting or other legal requirements, such as invoices for completed orders.",
     ],
   },
   {
@@ -67,7 +67,7 @@ const SECTIONS: LegalSectionData[] = [
     bullets: [
       "View and update your name, phone number and addresses in the Account section of the app.",
       "Turn location, notification and microphone access on or off at any time in your device settings. Martly still works without location; you can choose a store manually.",
-      "Delete your account by emailing hello@quartex.in from your registered email or with your registered mobile number. We will confirm once it is done.",
+      "Delete your account at any time in the app under Account → Delete account. If you can't access the app, email hello@quartex.in with your registered mobile number.",
       "Under India's Digital Personal Data Protection Act, 2023, you may request access to, correction or erasure of your personal data, and nominate another person to exercise these rights on your behalf.",
     ],
   },
